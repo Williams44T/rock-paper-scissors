@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RoShamBo</title>
+        <!-- 
+            This is a project prompted by The Odin Project >
+            Web Development 101 > Java Script Baics >
+            Rock Paper Scissors.
+         -->
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h1>Rock Paper Scissors</h1>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+        <h2 id="currentGame"></h2>
+        <p id="currentRounds"></p>
+
+        <script>
+            // establish some global variables
+            let game = 0;
+            let currentGame = document.getElementById("currentGame");
+            
+            // Get the player's name
+            let user = 
+                prompt( "Welcome Stranger! I'm Twills.\nWhat should I call you?");
+            alert(`Nice to meet you, ${user}!! Let's play some roshambo!`);
+
+            // Establish the number of rounds to be played
+            establishRoundCount();
+            function establishRoundCount() {
+                let rounds =
+                    +prompt("How many rounds shall we play?",0);
+                switch(true) {
+                    case isNaN(rounds):
+                        alert("We're gonna need an actual number of rounds before we proceed.");
+                        establishRoundCount();
+                    break;
+                    case rounds == 0:
+                        alert("Zero?! Come on now.\nYou can't win unless you play!");
+                        establishRoundCount();
+                    break;
+                    case rounds%2 == 0:
+                        alert("Let's play an odd number of rounds.\nThere shall only be one winner!");
+                        establishRoundCount();  
+                    break;
+                    case !(Math.floor(rounds)-rounds == 0): 
+                        alert("Pick a nice, round number.\nNo partial games!!");
+                        establishRoundCount();
+                    break;
+                    case rounds < 0: 
+                        alert("How the heck are we suppose to play a negative amount of rounds?!");
+                        establishRoundCount();
+                    break;
+                    case rounds == 1:
+                        alert(`Alright! ${(rounds)} round of roshambo it is. Sudden Death!`);
+                        setGameCount();
+                    break;
+                    case rounds > 29:
+                        alert(`${(rounds)} rounds?! You must have a lot of time on your hands.\n It's on!`);
+                        setGameCount();
+                    break;
+                    default:
+                        alert(`Alright! ${(rounds)} rounds of roshambo it is. Let's begin!`);
+                        setGameCount();
+                }
+            }
+
+            // Set up game counter
+            function setGameCount() {
+                game += 1;
+                currentGame.innerHTML = `Game number:${(game)}`;
+            }
+            
+            // Have computer choose a random option
+            function computerPlay() {
+                let choices = ["rock", "paper", "scissors"];
+                return choices[Math.floor(Math.random()*(choices.length))];
+            }
+
+        </script>
+    </body>
+</html>

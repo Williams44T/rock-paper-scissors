@@ -1,0 +1,55 @@
+html {
+    background-color: #0c0c0c;
+    color: #f9f7f7;
+}
+
+#header {
+    width: 100%;
+    font-style: italic;
+    text-align: center;
+}
+
+#header > img {
+    width: 150px;
+    height: 100px;
+    position: relative;
+    left: 18px;
+}
+
+#stage1,
+#stage2,
+#stage3 {
+    width: 100%;
+    text-align: center;
+}
+
+#playerAvatarOptions,
+#npcAvatarOptions,
+#battlefieldOptions {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    grid-gap: 10px;
+    margin: auto;
+    width: 50%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+#playerAvatarOptions > button, 
+#npcAvatarOptions > button,
+#battfieldOptions > button  {
+    display: block;
+    text-align: center;
+    background-color: #dad16a;
+    padding: 0;
+    border: 3px solid black;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+img {
+    max-width: 150px;
+    max-height: 150px;
+}

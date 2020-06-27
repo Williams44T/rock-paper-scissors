@@ -10,6 +10,8 @@ let stageFour = document.getElementById("stage4");
 
 // Stage one will be revealed by increasing opacity upon entering the webpage
 (function() {
+    stageOne.style.visibility = "visible";
+    stageOne.style.position = "relative";
     let i = 0;
     let j = 500;
     let revealStageInterval = setInterval(forStageOne,1);
@@ -55,11 +57,13 @@ function checkPlayerName() {
     if (playerName === "") {
         alert("You must choose your champion\nand offer a name before hitting submit.");
     } else {
-         hideStage(stageOne);
+        console.log(`Player Avatar is ${playerAvatar}`);
+        console.log(`Player Name is ${playerName}`);
+        hideStageOne();
     }
 }
 
-function hideStage(stage) {
+function hideStageOne() {
     let j = 200;
     let i = j;
     let hideStageInterval = setInterval(forStageOne,1);
@@ -68,7 +72,7 @@ function hideStage(stage) {
             clearInterval(hideStageInterval);
         } else {
             i--;
-            stage.style.opacity = i/j;
+            stageOne.style.opacity = i/j;
         }
         console.log("hiding stage one");
     }
@@ -80,16 +84,15 @@ function revealStageTwo() {
     stageOne.style.position = "absolute";
     stageTwo.style.visibility = "visible";  
     stageTwo.style.position = "relative";
-    let i = 1000;
-    // let i = stageTwo.style.left;
-    stageTwo.style.left = i;
-    let revealStageInterval = setInterval(reveal,10);
+    let i = 0;
+    let j = 200;
+    let revealStageInterval = setInterval(reveal,1);
     function reveal() {
-        if (i==0) {
+        if (i == j) {
             clearInterval(revealStageInterval);
-        } else{
-            i -= 10;
-            stageTwo.style.left= i +"px";
+        } else {
+            i++;
+            stageTwo.style.opacity = i/j;
         }
         console.log("revealing stage two");
     }
@@ -110,7 +113,7 @@ function disablePlayerAvatar() {
     }
 }
 
-function setNpcAvatar () {
+function setNpcAvatar() {
     let npcAvatars = document.getElementsByName("npcAvatarOptions");
     let i = 0;
     while (i < npcAvatars.length) {
@@ -128,13 +131,42 @@ function checkNpcAvatar() {
     if (npcAvatar === "") {
         alert("You must choose your rival before hitting submit.\nIt cannot be the same as your champion.");
     } else {
-        revealStageThree();
+        console.log(`Opponent is ${npcAvatar}`);
+        hideStageTwo();
     }
 }
 
+function hideStageTwo() {
+    let j = 200;
+    let i = j;
+    let hideStageInterval = setInterval(hide,1);
+    function hide() {
+        if (i == 0) {
+            clearInterval(hideStageInterval);
+        } else {
+            i--;
+            stageTwo.style.opacity = i/j;
+        }
+        console.log("hiding stage two");
+    }
+    let stageRevealInterval = setTimeout(revealStageThree,1000);
+}
+
 function revealStageThree() {
-    document.getElementById("stage2").style.visibility = "hidden";
-    document.getElementById("stage2").style.position = "absolute";
-    document.getElementById("stage3").style.visibility = "visible";
-    document.getElementById("stage3").style.position = "relative";
+    stageTwo.style.visibility = "hidden";
+    stageTwo.style.position = "absolute";
+    stageThree.style.visibility = "visible";  
+    stageThree.style.position = "relative";
+    let i = 0;
+    let j = 200;
+    let revealStageInterval = setInterval(reveal,1);
+    function reveal() {
+        if (i == j) {
+            clearInterval(revealStageInterval);
+        } else {
+            i++;
+            stageThree.style.opacity = i/j;
+        }
+        console.log("revealing stage three");
+    }
 }

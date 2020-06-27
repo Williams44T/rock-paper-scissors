@@ -243,4 +243,23 @@ function revealStageFour() {
         }
         console.log("revealing stage four");
     }
+    let applyBackgroundInterval = setTimeout(applyBattlefield,1000);
+}
+
+// disabling the player chosen avatar so it can't be chosen as the NPC
+function applyBattlefield() {
+    let html = document.getElementsByTagName("html");
+    let battlefields = document.getElementsByName("battlefieldOptions");
+    let i = 0;
+    while (i < battlefields.length) {
+        if (battlefield === battlefields[i].value) {
+            let battlefieldLabel = battlefields[i].nextElementSibling;
+            let labelStyles = window.getComputedStyle(battlefieldLabel);
+            background = labelStyles.getPropertyValue("background-image");
+            document.body.style.backgroundImage = background;
+            break;
+        } else {
+            i++;
+        }
+    }
 }

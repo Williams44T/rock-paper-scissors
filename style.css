@@ -1,9 +1,18 @@
 html {
     background-color:#dad16a;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 
 body {
     text-align: center;
+    height: 100vw;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin: 0;
 }
 
 #header {

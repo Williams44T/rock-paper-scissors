@@ -1,6 +1,9 @@
 html {
-    background-color: #0c0c0c;
-    color: #f9f7f7;
+    background-color:#dad16a;
+}
+
+body {
+    text-align: center;
 }
 
 #header {
@@ -9,18 +12,59 @@ html {
     text-align: center;
 }
 
+#header > h1 {
+    width: 100%;
+    margin: auto;
+    margin-top: 8px;
+    position: fixed;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    z-index: 2;
+    background-color: black;
+    color: white;
+}
+
 #header > img {
     width: 150px;
     height: 100px;
     position: relative;
     left: 18px;
+    margin-top: 37px;
+    z-index: 1;
+}
+
+#stage1 {
+    opacity: 0;
+}
+
+/* Hide all but first stage upon entering website */
+#stage2,
+#stage3,
+#stage4 {
+    visibility: hidden;
+    position: absolute;
 }
 
 #stage1,
 #stage2,
 #stage3 {
-    width: 100%;
+    width: 500px;
     text-align: center;
+    margin: auto;
+    padding: 0 15px;
+    border: 8px ridge red;
+    border-radius: 30px;
+    box-shadow: 10px 8px 6px grey;
+    background-color: black;
+    color: white;
+}
+
+#choosePlayerAvatar > h2,
+#chooseNpcAvatar > h2,
+#chooseBattlefield > h2 {
+    padding-top: 10px;
+    font-family: 'Rubik Mono One';
 }
 
 #playerAvatarOptions,
@@ -36,17 +80,87 @@ html {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-#playerAvatarOptions > button, 
-#npcAvatarOptions > button,
+/* default style for avatar options */
+.avatarOptions,
 #battfieldOptions > button  {
     display: block;
     text-align: center;
     background-color: #dad16a;
     padding: 0;
-    border: 3px solid black;
+    border: 5px ridge red;
     border-radius: 50%;
     width: 150px;
     height: 150px;
+    cursor: pointer;
+}
+
+/* style for hovering over avatar options */
+.avatarOptions:hover,
+#battlefieldOptions > button:hover {
+    box-shadow: 0px 0px 6px 7px firebrick;
+    background-color: #DAD142;
+}
+
+/* hide the radio buttons */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  left: -9999px;
+}
+
+/* style for checked avatars */
+.avatarOptions:checked + label {
+    background-color: #154815;
+    border: 5px ridge #efdbdb;
+}
+
+/* Style the player chosen avatar
+to show it can't be chosen as an opponent */
+#playerAvatar + label {
+    background-color: red;
+}
+
+.submitButton {
+    display: block;
+    margin: 10px auto;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    background-color: #670505;
+    border: 2px ridge silver;
+    font-family: 'Rubik Mono One';
+    font-size: 17px;
+    color: white;
+    box-shadow: 2px 2px 4px 0px grey;
+}
+
+.submitButton:hover {
+    background-color: #d85757;
+    box-shadow: 0px 0px 8px 5px firebrick;
+}
+
+.submitButton:focus {
+    position: relative;
+    left: 3px;
+    top: 3px;
+    outline: none;
+    box-shadow: none;
+}
+
+/* #playerNameForm > p, */
+/* #roundCountForm > p, */
+.submitText {
+    font-family: sans-serif;
+    margin-bottom: 5px;
+}
+
+input {
+    border-radius: 10px;
+    height: 20px;
+    font-family: monospace;
+    text-align: center;
 }
 
 img {

@@ -11,7 +11,12 @@
             Yeah I went a little overboard, but it was fun.
     -->
     <meta charset="UTF-8" />
-    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+    <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Bowlby One SC' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Faster One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Rubik Mono One' rel='stylesheet'>
 </head>
 
 <body>
@@ -32,51 +37,88 @@
     </div>
 
     <!-- STAGE ONE: choose player avatar and give name -->
-    <div id="stage1">
+    <div id="stage1" class="stage">
         <div id="choosePlayerAvatar">
-            <h2>CHOOSE YOUR PLAYER</h2>
+            <h2>CHOOSE YOUR CHAMPION</h2>
             <div id="playerAvatarOptions">
-                <button><img src="./images/avatars/vegeta.png" alt=""></button>
-                <button><img src="./images/avatars/naruto.png" alt=""></button>
-                <button><img src="./images/avatars/sasuke.png" alt=""></button>
-                <button><img src="./images/avatars/luffy.png" alt=""></button>
-                <button><img src="./images/avatars/goku.png" alt=""></button>
-                <button><img src="./images/avatars/zoro.png" alt=""></button>
-                <button><img src="./images/avatars/link.png" alt=""></button>
-                <button><img src="./images/avatars/aang.png" alt=""></button>
-                <button><img src="./images/avatars/deku.png" alt=""></button>
+                <input id="playerAvatar1"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="goku">
+                <label for="playerAvatar1" class="avatarOptions">
+                    <img src="./images/avatars/goku.png" alt=""></label>
+                <input id="playerAvatar2"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="vegeta">
+                <label for="playerAvatar2" class="avatarOptions">
+                    <img src="./images/avatars/vegeta.png" alt=""></label>
+                <input id="playerAvatar3"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="naruto">
+                <label for="playerAvatar3" class="avatarOptions">
+                    <img src="./images/avatars/naruto.png" alt=""></label>
+                <input id="playerAvatar4"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="sasuke">
+                <label for="playerAvatar4" class="avatarOptions">
+                    <img src="./images/avatars/sasuke.png" alt=""></label>
+                <input id="playerAvatar5"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="luffy">
+                <label for="playerAvatar5" class="avatarOptions">
+                    <img src="./images/avatars/luffy.png" alt=""></label>
+                <input id="playerAvatar6"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="zoro">
+                <label for="playerAvatar6" class="avatarOptions">
+                    <img src="./images/avatars/zoro.png" alt=""></label>
+                <input id="playerAvatar7"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="link">
+                <label for="playerAvatar7" class="avatarOptions">
+                    <img src="./images/avatars/link.png" alt=""></label>
+                <input id="playerAvatar8"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="aang">
+                <label for="playerAvatar8" class="avatarOptions">
+                    <img src="./images/avatars/aang.png" alt=""></label>
+                <input id="playerAvatar9"  class="avatarOptions" type="radio" name="playerAvatarOptions" value="deku">
+                <label for="playerAvatar9" class="avatarOptions">
+                    <img src="./images/avatars/deku.png" alt=""></label>
             </div>
         </div>
         <div id="playerNameForm">
-            <p>ENTER YOUR NAME</p>
+            <p class="submitText">ENTER YOUR NAME</p>
             <input id="playerName" type="text">
             <!-- Clicking submit will hide the stage 1 div and reveal the stage 2 div -->
-            <button id="submitPlayerAvatar">SUBMIT</button>
-        </div>    
+            <button id="submitPlayerAvatar" class="submitButton" onclick="setPlayerAvatar();">SUBMIT</button>
+        </div>
     </div>
 
     <!-- STAGE TWO: choose NPC avatar -->
-    <div id="stage2">
+    <div id="stage2" class="stage">
         <div id="chooseNpcAvatar">
             <h2>CHOOSE YOUR OPPONENT</h2>
             <div id="npcAvatarOptions">
-                <button><img src="./images/avatars/goku.png" alt=""></button>
-                <button><img src="./images/avatars/vegeta.png" alt=""></button>
-                <button><img src="./images/avatars/naruto.png" alt=""></button>
-                <button><img src="./images/avatars/sasuke.png" alt=""></button>
-                <button><img src="./images/avatars/luffy.png" alt=""></button>
-                <button><img src="./images/avatars/zoro.png" alt=""></button>
-                <button><img src="./images/avatars/link.png" alt=""></button>
-                <button><img src="./images/avatars/aang.png" alt=""></button>
-                <button><img src="./images/avatars/deku.png" alt=""></button>
+                <input id="npcAvatar1"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="goku">
+                <label for="npcAvatar1" class="avatarOptions">
+                    <img src="./images/avatars/goku.png" alt=""></label>
+                <input id="npcAvatar2"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="vegeta">
+                <label for="npcAvatar2" class="avatarOptions">
+                    <img src="./images/avatars/vegeta.png" alt=""></label>
+                <input id="npcAvatar3"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="naruto">
+                <label for="npcAvatar3" class="avatarOptions">
+                    <img src="./images/avatars/naruto.png" alt=""></label>
+                <input id="npcAvatar4"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="sasuke">
+                <label for="npcAvatar4" class="avatarOptions">
+                    <img src="./images/avatars/sasuke.png" alt=""></label>
+                <input id="npcAvatar5"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="luffy">
+                <label for="npcAvatar5" class="avatarOptions">
+                    <img src="./images/avatars/luffy.png" alt=""></label>
+                <input id="npcAvatar6"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="zoro">
+                <label for="npcAvatar6" class="avatarOptions">
+                    <img src="./images/avatars/zoro.png" alt=""></label>
+                <input id="npcAvatar7"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="link">
+                <label for="npcAvatar7" class="avatarOptions">
+                    <img src="./images/avatars/link.png" alt=""></label>
+                <input id="npcAvatar8"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="aang">
+                <label for="npcAvatar8" class="avatarOptions">
+                    <img src="./images/avatars/aang.png" alt=""></label>
+                <input id="npcAvatar9"  class="avatarOptions" type="radio" name="npcAvatarOptions" value="deku">
+                <label for="npcAvatar9" class="avatarOptions">
+                    <img src="./images/avatars/deku.png" alt=""></label>
             </div>
-            <!-- Clicking submit will hide the stage 2 div and reveal the stage 3 div -->
-            <button id="submitNpcAvatar">SUBMIT</button>
+            <!-- Clicking submit will hide the stage 2 div and reveal the stage 3 div -->   
+            <p class="submitText">SUBMIT YOUR OPPONENT</p>
+            <button id="submitNpcAvatar" class="submitButton" onclick="setNpcAvatar();">SUBMIT</button>
         </div>
     </div>
 
     <!-- STAGE THREE: select battleground and rounds -->
-    <div id="stage3">
+    <div id="stage3" class="stage">
         <div id="chooseBattlefield">
             <h2>CHOOSE YOUR BATTLEFIELD</h2>
             <div id="battlefieldOptions">
@@ -91,16 +133,16 @@
                 <button><img src="" alt=""></button>
             </div>
             <div id="roundCountForm">
-                <p>ROUNDS TO BE PLAYED</p>
+                <p class="submitText">ROUNDS TO BE PLAYED</p>
                 <input id="roundCount" type="text">
-             <!-- Clicking submit will hide the stage 3 div and reveal the stage 4 div -->
-            <button id="submitRoundCount">SUBMIT</button>
+                <!-- Clicking submit will hide the stage 3 div and reveal the stage 4 div -->
+                <button id="submitRoundCount" class="submitButton">SUBMIT</button>
             </div>
         </div>
     </div>
 
     <!-- STAGE FOUR: enter the battlefield -->
-    <div id="stage4">
+    <div id="stage4" class="stage">
         <div id="stage4top">
             <div id="playerTracker">
                 <!-- script to fill this header in -->
@@ -152,8 +194,11 @@
 
     </div>
 
-    <h1>Rock Paper Scissors</h1>
-    <div id="gameTracker"></div>
-        
+    <!-- <h1>Rock Paper Scissors</h1> -->
+    <!-- <div id="gameTracker"></div> -->
+
+    <script src="script2.js"></script>
+
 </body>
+
 </html>

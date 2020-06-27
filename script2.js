@@ -3,6 +3,8 @@
 let playerAvatar = "";
 let playerName = "";
 let npcAvatar = "";
+let battlefield = "";
+let rounds = "";
 let stageOne = document.getElementById("stage1");
 let stageTwo = document.getElementById("stage2");
 let stageThree = document.getElementById("stage3");
@@ -50,7 +52,7 @@ function checkPlayerAvatar() {
 
 function setPlayerName() {
     playerName = document.getElementById("playerName").value;
-    checkPlayerName(playerName);
+    checkPlayerName();
 }
 
 function checkPlayerName() {
@@ -168,5 +170,77 @@ function revealStageThree() {
             stageThree.style.opacity = i/j;
         }
         console.log("revealing stage three");
+    }
+}
+
+function setBattlefield() {
+    let battlefields = document.getElementsByName("battlefieldOptions");
+    let i = 0;
+    while (i < battlefields.length) {
+        if (battlefields[i].checked) {
+            battlefield = battlefields[i].value;
+            break;
+        } else {
+            i++
+        }
+    }
+    checkBattlefield();
+}
+
+function checkBattlefield() {
+    if (battlefield === "") {
+        alert("You must choose your battlefield\nand the number of rounds before hitting submit.");
+    } else {
+    setRoundCount();
+    }
+}
+
+function setRoundCount() {
+    rounds = document.getElementById("roundCount").value;
+    checkRoundCount();
+}
+
+function checkRoundCount() {
+    if (rounds === "" || isNaN(rounds)) {
+        alert("You must choose your battlefield\nand the number of rounds before hitting submit.");
+    } else {
+        console.log(`The battle will be fought at ${battlefield}`);
+        console.log(`${rounds} rounds will be played`);
+        hideStageThree();
+    }
+}
+
+function hideStageThree() {
+    let j = 200;
+    let i = j;
+    let hideStageInterval = setInterval(hide,1);
+    function hide() {
+        if (i == 0) {
+            clearInterval(hideStageInterval);
+        } else {
+            i--;
+            stageThree.style.opacity = i/j;
+        }
+        console.log("hiding stage three");
+    }
+    let stageRevealInterval = setTimeout(revealStageFour,1000);
+}
+
+function revealStageFour() {
+    stageThree.style.visibility = "hidden";
+    stageThree.style.position = "absolute";
+    stageFour.style.visibility = "visible";  
+    stageFour.style.position = "relative";
+    let i = 0;
+    let j = 200;
+    let revealStageInterval = setInterval(reveal,1);
+    function reveal() {
+        if (i == j) {
+            clearInterval(revealStageInterval);
+        } else {
+            i++;
+            stageFour.style.opacity = i/j;
+        }
+        console.log("revealing stage four");
     }
 }

@@ -223,7 +223,8 @@ function hideStageThree() {
         }
         console.log("hiding stage three");
     }
-    let stageRevealInterval = setTimeout(revealStageFour,1000);
+    let battlefieldRevealInterval = setTimeout(applyBattlefield,1000);
+    // let stageRevealInterval = setTimeout(revealStageFour,5000);
 }
 
 function revealStageFour() {
@@ -243,10 +244,9 @@ function revealStageFour() {
         }
         console.log("revealing stage four");
     }
-    let applyBackgroundInterval = setTimeout(applyBattlefield,1000);
+    applyBattlefield();
 }
 
-// disabling the player chosen avatar so it can't be chosen as the NPC
 function applyBattlefield() {
     let html = document.getElementsByTagName("html");
     let battlefields = document.getElementsByName("battlefieldOptions");
@@ -256,10 +256,32 @@ function applyBattlefield() {
             let battlefieldLabel = battlefields[i].nextElementSibling;
             let labelStyles = window.getComputedStyle(battlefieldLabel);
             background = labelStyles.getPropertyValue("background-image");
+            stageThree.style.visibility = "hidden";
+            stageThree.style.position = "absolute";
+            stageFour.style.visibility = "visible";  
+            stageFour.style.position = "relative";
+            document.body.style.opacity = 0;
             document.body.style.backgroundImage = background;
+            revealBattlefield();
             break;
         } else {
             i++;
         }
+    }
+}
+
+function revealBattlefield() {
+    let i = 0;
+    let j = 400;
+    let revealBattlefieldInterval = setInterval(reveal,1);
+    function reveal() {
+        if (i == j) {
+            clearInterval(revealBattlefieldInterval);
+        } else {
+            i++;
+            document.body.style.opacity = i/j;
+            stageFour.style.opacity = i/j;
+        }
+        console.log("revealing stage four");
     }
 }

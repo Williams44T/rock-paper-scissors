@@ -1,5 +1,4 @@
-// Set global variables
-
+// GLOBAL VARIABLES
 let playerAvatar = "";
 let playerName = "";
 let npcAvatar = "";
@@ -9,279 +8,147 @@ let stageOne = document.getElementById("stage1");
 let stageTwo = document.getElementById("stage2");
 let stageThree = document.getElementById("stage3");
 let stageFour = document.getElementById("stage4");
+let playerAvatarOptions = document.getElementsByName("playerAvatarOptions");
+let npcAvatarOptions = document.getElementsByName("npcAvatarOptions");
+let battlefieldOptions = document.getElementsByName("battlefieldOptions");
 
-// Stage one will be revealed by increasing opacity upon entering the webpage
-(function() {
-    stageOne.style.visibility = "visible";
-    stageOne.style.position = "relative";
-    let i = 0;
-    let j = 500;
-    let revealStageInterval = setInterval(forStageOne,1);
-    function forStageOne() {
-        if (i == j) {
-            clearInterval(revealStageInterval);
-        } else {
-            i++;
-            stageOne.style.opacity = i/j;
-        }
-        console.log("revealing stage one");
-    }
+// GENERAL FLOW
+(function enterSite() {
+    prepForReveal(stageTwo, stageOne);
+    revealElement(stageOne, 350);
 })();
 
-function setPlayerAvatar() {
-    let playerAvatars = document.getElementsByName("playerAvatarOptions");
-    let i = 0;
-    while (i < playerAvatars.length) {
-        if (playerAvatars[i].checked) {
-            playerAvatar = playerAvatars[i].value;
-            break;
-        } else {
-            i++;
-        }
-    }
-    checkPlayerAvatar();
-}
+let submitStageOne = document.getElementById("submitPlayerAvatar");
+submitStageOne.onclick = function() {completeStageOne()};
 
-function checkPlayerAvatar() {
-    if (playerAvatar === "") {
-        alert("You must choose your champion\nand offer a name before hitting submit.");
-    } else {
-        setPlayerName();
-    }
-}
-
-function setPlayerName() {
+function completeStageOne() {
+    // to detect which avatar the player chose
+    playerAvatar = findRadioSelection(playerAvatarOptions);
     playerName = document.getElementById("playerName").value;
-    checkPlayerName();
-}
-
-function checkPlayerName() {
-    if (playerName === "") {
-        alert("You must choose your champion\nand offer a name before hitting submit.");
+    // to make sure an avatar and name was chosen before moving to stage two
+    if(playerAvatar === "" || playerName === "") {
+        alert("You must give your name and select your Champion before submitting.");
     } else {
-        console.log(`Player Avatar is ${playerAvatar}`);
-        console.log(`Player Name is ${playerName}`);
-        hideStageOne();
+        hideElement(stageOne, 300);
+        setTimeout(revealStageTwo, 1500);
     }
-}
-
-function hideStageOne() {
-    let j = 200;
-    let i = j;
-    let hideStageInterval = setInterval(forStageOne,1);
-    function forStageOne() {
-        if (i == 0) {
-            clearInterval(hideStageInterval);
-        } else {
-            i--;
-            stageOne.style.opacity = i/j;
-        }
-        console.log("hiding stage one");
-    }
-    let stageRevealInterval = setTimeout(revealStageTwo,1000);
 }
 
 function revealStageTwo() {
-    stageOne.style.visibility = "hidden";
-    stageOne.style.position = "absolute";
-    stageTwo.style.visibility = "visible";  
-    stageTwo.style.position = "relative";
-    let i = 0;
-    let j = 200;
-    let revealStageInterval = setInterval(reveal,1);
-    function reveal() {
-        if (i == j) {
-            clearInterval(revealStageInterval);
-        } else {
-            i++;
-            stageTwo.style.opacity = i/j;
-        }
-        console.log("revealing stage two");
-    }
-    disablePlayerAvatar();
+    prepForReveal(stageOne, stageTwo);
+    // to disable the player chosen avatar from being selected in stage two
+    let chosenPlayer = getArrayPosition(npcAvatarOptions, playerAvatar);
+    chosenPlayer.id = "playerAvatar";
+    revealElement(stageTwo, 300);
 }
 
-// disabling the player chosen avatar so it can't be chosen as the NPC
-function disablePlayerAvatar() {
-    let npcAvatars = document.getElementsByName("npcAvatarOptions");
-    let i = 0;
-    while (i < npcAvatars.length) {
-        if (playerAvatar === npcAvatars[i].value) {
-            npcAvatars[i].id = "playerAvatar";
-            break;
-        } else {
-            i++;
-        }
-    }
-}
+let submitStageTwo = document.getElementById("submitNpcAvatar");
+submitStageTwo.onclick = function() {completeStageTwo()};
 
-function setNpcAvatar() {
-    let npcAvatars = document.getElementsByName("npcAvatarOptions");
-    let i = 0;
-    while (i < npcAvatars.length) {
-        if (npcAvatars[i].checked) {
-            npcAvatar = npcAvatars[i].value;
-            break;
-        } else {
-            i++
-        }
-    }
-    checkNpcAvatar();
-}
-
-function checkNpcAvatar() {
-    if (npcAvatar === "") {
-        alert("You must choose your rival before hitting submit.\nIt cannot be the same as your champion.");
+function completeStageTwo() {
+    // to detect which avatar the player chose
+    npcAvatar = findRadioSelection(npcAvatarOptions);
+    // to make sure an avatar was chosen before moving to stage three
+    if(npcAvatar === "") {
+        alert("You must select your opponent before submitting.");
     } else {
-        console.log(`Opponent is ${npcAvatar}`);
-        hideStageTwo();
+        hideElement(stageTwo, 300);
+        setTimeout(revealStageThree, 1500);
     }
-}
-
-function hideStageTwo() {
-    let j = 200;
-    let i = j;
-    let hideStageInterval = setInterval(hide,1);
-    function hide() {
-        if (i == 0) {
-            clearInterval(hideStageInterval);
-        } else {
-            i--;
-            stageTwo.style.opacity = i/j;
-        }
-        console.log("hiding stage two");
-    }
-    let stageRevealInterval = setTimeout(revealStageThree,1000);
 }
 
 function revealStageThree() {
-    stageTwo.style.visibility = "hidden";
-    stageTwo.style.position = "absolute";
-    stageThree.style.visibility = "visible";  
-    stageThree.style.position = "relative";
-    let i = 0;
-    let j = 200;
-    let revealStageInterval = setInterval(reveal,1);
-    function reveal() {
-        if (i == j) {
-            clearInterval(revealStageInterval);
-        } else {
-            i++;
-            stageThree.style.opacity = i/j;
-        }
-        console.log("revealing stage three");
-    }
+    prepForReveal(stageTwo, stageThree);
+    revealElement(stageThree, 300);
 }
 
-function setBattlefield() {
-    let battlefields = document.getElementsByName("battlefieldOptions");
-    let i = 0;
-    while (i < battlefields.length) {
-        if (battlefields[i].checked) {
-            battlefield = battlefields[i].value;
-            break;
-        } else {
-            i++
-        }
-    }
-    checkBattlefield();
-}
+let submitStageThree = document.getElementById("submitRoundCount");
+submitStageThree.onclick = function() {completeStageThree()};
 
-function checkBattlefield() {
-    if (battlefield === "") {
-        alert("You must choose your battlefield\nand the number of rounds before hitting submit.");
-    } else {
-    setRoundCount();
-    }
-}
-
-function setRoundCount() {
+function completeStageThree() {
+    // to detect which battlefield the player chose
+    battlefield = findRadioSelection(battlefieldOptions);
     rounds = document.getElementById("roundCount").value;
-    checkRoundCount();
-}
-
-function checkRoundCount() {
-    if (rounds === "" || isNaN(rounds)) {
-        alert("You must choose your battlefield\nand the number of rounds before hitting submit.");
+    // to make sure a battlefield and round count was chosen, and
+    // that the round count is an actual number, before moving to stage four
+    if(battlefield === "" || rounds === "" || isNaN(rounds)) {
+        alert("You must select a battlefield and round count before submitting.\nThe round count must be a number.");
     } else {
-        console.log(`The battle will be fought at ${battlefield}`);
-        console.log(`${rounds} rounds will be played`);
-        hideStageThree();
+        hideElement(stageThree, 300);
+        setTimeout(revealStageFour, 1500);
     }
-}
-
-function hideStageThree() {
-    let j = 200;
-    let i = j;
-    let hideStageInterval = setInterval(hide,1);
-    function hide() {
-        if (i == 0) {
-            clearInterval(hideStageInterval);
-        } else {
-            i--;
-            stageThree.style.opacity = i/j;
-        }
-        console.log("hiding stage three");
-    }
-    let battlefieldRevealInterval = setTimeout(applyBattlefield,1000);
-    // let stageRevealInterval = setTimeout(revealStageFour,5000);
-}
+}   
 
 function revealStageFour() {
-    stageThree.style.visibility = "hidden";
-    stageThree.style.position = "absolute";
-    stageFour.style.visibility = "visible";  
-    stageFour.style.position = "relative";
-    let i = 0;
-    let j = 200;
-    let revealStageInterval = setInterval(reveal,1);
-    function reveal() {
-        if (i == j) {
-            clearInterval(revealStageInterval);
-        } else {
-            i++;
-            stageFour.style.opacity = i/j;
-        }
-        console.log("revealing stage four");
-    }
-    applyBattlefield();
+    prepForReveal(stageThree, stageFour);
+    // also prepping the background battlefield to be revealed
+    document.body.style.opacity = 0;
+    let chosenBattlefield = getArrayPosition(battlefieldOptions, battlefield);
+    let background = window.getComputedStyle(chosenBattlefield.nextElementSibling).getPropertyValue("background-image");
+    document.body.style.backgroundImage = background;
+    revealElement(stageFour, 300);
+    revealElement(document.body, 300);
 }
 
-function applyBattlefield() {
-    let html = document.getElementsByTagName("html");
-    let battlefields = document.getElementsByName("battlefieldOptions");
+// FUNCTIONS DEFINED
+function prepForReveal(outgoingElement, incomingElement) {
+    outgoingElement.style.visibility = "hidden";
+    outgoingElement.style.position = "absolute";
+    incomingElement.style.visibility = "visible";  
+    incomingElement.style.position = "relative";
+    console.log("prepped " + incomingElement + " for reveal");
+}
+
+function revealElement(element, time) {
     let i = 0;
-    while (i < battlefields.length) {
-        if (battlefield === battlefields[i].value) {
-            let battlefieldLabel = battlefields[i].nextElementSibling;
-            let labelStyles = window.getComputedStyle(battlefieldLabel);
-            background = labelStyles.getPropertyValue("background-image");
-            stageThree.style.visibility = "hidden";
-            stageThree.style.position = "absolute";
-            stageFour.style.visibility = "visible";  
-            stageFour.style.position = "relative";
-            document.body.style.opacity = 0;
-            document.body.style.backgroundImage = background;
-            revealBattlefield();
-            break;
+    let j = time;
+    let interval = setInterval(reveal,1);
+    function reveal() {
+        if (i == j) {
+            clearInterval(interval);
         } else {
             i++;
+            element.style.opacity = i/j;
         }
+        console.log(`revealing ${element}`);
     }
 }
 
-function revealBattlefield() {
+function hideElement(element, time) {
+    let j = time;
+    let i = j;
+    let interval = setInterval(hide,1);
+    function hide() {
+        if (i == 0) {
+            clearInterval(interval);
+        } else {
+            i--;
+            element.style.opacity = i/j;
+        }
+        console.log(`hiding ${element}`);
+    }
+}
+
+function findRadioSelection(array) {
     let i = 0;
-    let j = 400;
-    let revealBattlefieldInterval = setInterval(reveal,1);
-    function reveal() {
-        if (i == j) {
-            clearInterval(revealBattlefieldInterval);
+    while (i < array.length) {
+        if (array[i].checked) {
+            let selection = array[i].value;
+            return selection;
         } else {
             i++;
-            document.body.style.opacity = i/j;
-            stageFour.style.opacity = i/j;
         }
-        console.log("revealing stage four");
+    }
+}
+
+function getArrayPosition(array, searchkey) {
+    let i = 0;
+    while (i < array.length) {
+        if (searchkey === array[i].value) {
+            let position = array[i];
+            return position;
+        } else {
+            i++;
+        }
     }
 }
